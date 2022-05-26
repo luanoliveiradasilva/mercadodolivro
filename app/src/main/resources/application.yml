@@ -1,4 +1,4 @@
-#Connection wit mysql
+#Connection with mysql
 spring:
   jpa:
     hibernate:

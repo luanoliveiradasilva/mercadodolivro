@@ -1,13 +1,37 @@
 package com.example.app.extension
 
+import com.example.app.controller.request.PostBookRequest
+import com.example.app.controller.request.PutBookRequest
 import com.example.app.controller.request.PostCustomerRequest
 import com.example.app.controller.request.PutCustomerRequest
-import com.example.app.model.CustomerModel
+import com.example.app.model.book.BookModel
+import com.example.app.model.customer.CustomerModel
+import com.example.app.model.enums.BookStatus
+import com.example.app.model.enums.CustomerStatus
 
 fun PostCustomerRequest.toCustomerModel(): CustomerModel {
-   return CustomerModel(name = this.name, email = this.email)
+    return CustomerModel(name = this.name, email = this.email, status = CustomerStatus.ACTIVE)
 }
 
-fun PutCustomerRequest.toCustomerModel(id: Int): CustomerModel{
-    return CustomerModel(id = id, name = this.name, email = this.email)
+fun PutCustomerRequest.toCustomerModel(previousValue: CustomerModel): CustomerModel {
+    return CustomerModel(id = previousValue.id, name = this.name, email = this.email, previousValue.status)
+}
+
+fun PostBookRequest.toBookModel(customer: CustomerModel): BookModel {
+    return BookModel(
+        nameBook = this.name,
+        price = this.price,
+        status = BookStatus.ACTIVE,
+        customer = customer
+    )
+}
+
+fun PutBookRequest.toBookModel(previousValue: BookModel): BookModel {
+    return BookModel(
+        idBook = previousValue.idBook,
+        nameBook = this.name ?: previousValue.nameBook,
+        price = this.price ?: previousValue.price,
+        status = previousValue.status,
+        customer = previousValue.customer
+    )
 }

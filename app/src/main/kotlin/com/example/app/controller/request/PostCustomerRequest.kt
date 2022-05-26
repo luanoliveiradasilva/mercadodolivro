@@ -1,6 +1,9 @@
 package com.example.app.controller.request
 
-class PostCustomerRequest(
+import com.example.app.model.enums.CustomerStatus
+
+data class PostCustomerRequest(
     var name: String,
-    var email: String
+    var email: String,
+    var status: CustomerStatus
 )
