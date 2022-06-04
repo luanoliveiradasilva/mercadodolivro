@@ -1,9 +1,11 @@
 package com.example.app.extension
 
 import com.example.app.controller.request.PostBookRequest
-import com.example.app.controller.request.PutBookRequest
 import com.example.app.controller.request.PostCustomerRequest
+import com.example.app.controller.request.PutBookRequest
 import com.example.app.controller.request.PutCustomerRequest
+import com.example.app.controller.response.BookResponse
+import com.example.app.controller.response.CustomerResponse
 import com.example.app.model.book.BookModel
 import com.example.app.model.customer.CustomerModel
 import com.example.app.model.enums.BookStatus
@@ -33,5 +35,21 @@ fun PutBookRequest.toBookModel(previousValue: BookModel): BookModel {
         price = this.price ?: previousValue.price,
         status = previousValue.status,
         customer = previousValue.customer
+    )
+}
+
+fun CustomerModel.toResponse(): CustomerResponse {
+    return CustomerResponse(
+        id = this.id,
+        name = this.name,
+        email = this.email,
+        status = this.status
+    )
+}
+
+fun BookModel.toResponse(): BookResponse {
+    return BookResponse(
+        name = this.nameBook,
+        price = this.price
     )
 }
