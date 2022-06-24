@@ -7,7 +7,9 @@ import com.example.app.extension.toCustomerModel
 import com.example.app.extension.toResponse
 import com.example.app.service.CustomerService
 import org.springframework.http.HttpStatus
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("customer")
@@ -23,7 +25,7 @@ class CustomerController(
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody customer: PostCustomerRequest) {
+    fun create(@RequestBody @Valid customer: PostCustomerRequest) {
         customerService.create(customer.toCustomerModel())
     }
 

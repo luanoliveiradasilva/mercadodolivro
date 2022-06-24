@@ -20,4 +20,17 @@ class ControllerDevice {
         )
         return ResponseEntity(error, HttpStatus.NOT_FOUND)
     }
+
+    @ExceptionHandler(BadRequestException::class)
+    fun handlerBadRequest(exceptionBadError: BadRequestException, request: WebRequest): ResponseEntity<ErrorResponse>{
+        val errorBad = ErrorResponse(
+            httpCode = HttpStatus.BAD_REQUEST.value(),
+            message = exceptionBadError.message,
+            internalCode = exceptionBadError.errorCode,
+            null
+        )
+        return ResponseEntity(errorBad, HttpStatus.BAD_REQUEST)
+    }
+
+
 }
