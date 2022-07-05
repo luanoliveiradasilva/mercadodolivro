@@ -10,7 +10,7 @@ import javax.persistence.*
 data class PurchaseModel (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int,
+    var id: Int? = null,
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
@@ -18,17 +18,17 @@ data class PurchaseModel (
 
     @ManyToMany
     @JoinTable(name = "purchase_book",
-    joinColumns = [JoinColumn(name = "purchase_id")],
-    inverseJoinColumns = [JoinColumn(name = "book_id")])
-    val book: List<BookModel>,
+        joinColumns = [JoinColumn(name = "purchase_id")],
+        inverseJoinColumns = [JoinColumn(name = "book_id")])
+    val books: MutableList<BookModel>,
 
     @Column
-    val notaFiscal: String? = null,
+    val nfe: String? = null,
 
     @Column
     val price: BigDecimal,
 
     @Column(name = "created_at")
-    val creteAt: LocalDateTime
+    val createdAt: LocalDateTime = LocalDateTime.now()
 
 )
