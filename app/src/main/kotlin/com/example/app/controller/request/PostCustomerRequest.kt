@@ -9,5 +9,6 @@ data class PostCustomerRequest(
     var name: String,
     @field:Email
     var email: String,
-    var status: CustomerStatus
+    @field:NotEmpty
+    var password: String
 )

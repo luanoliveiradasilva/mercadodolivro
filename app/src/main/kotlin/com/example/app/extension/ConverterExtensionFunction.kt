@@ -12,11 +12,17 @@ import com.example.app.model.enums.BookStatus
 import com.example.app.model.enums.CustomerStatus
 
 fun PostCustomerRequest.toCustomerModel(): CustomerModel {
-    return CustomerModel(name = this.name, email = this.email, status = CustomerStatus.ACTIVE)
+    return CustomerModel(name = this.name, email = this.email, status = CustomerStatus.ACTIVE, password = this.password)
 }
 
 fun PutCustomerRequest.toCustomerModel(previousValue: CustomerModel): CustomerModel {
-    return CustomerModel(id = previousValue.id, name = this.name, email = this.email, previousValue.status)
+    return CustomerModel(
+        id = previousValue.id,
+        name = this.name,
+        email = this.email,
+        previousValue.status,
+        previousValue.password
+    )
 }
 
 fun PostBookRequest.toBookModel(customer: CustomerModel): BookModel {

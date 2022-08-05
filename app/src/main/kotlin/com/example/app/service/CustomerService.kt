@@ -5,6 +5,7 @@ import com.example.app.model.customer.CustomerModel
 import com.example.app.model.enums.CustomerStatus
 import com.example.app.model.enums.Errors
 import com.example.app.repository.CustomerRepository
+import com.mercadolivro.enums.Profile
 import org.springframework.stereotype.Service
 
 @Service
@@ -22,7 +23,10 @@ class CustomerService(
     }
 
     fun create(customer: CustomerModel) {
-        customerRepository.save(customer)
+        val customerCopy = customer.copy(
+            roles = setOf(Profile.CUSTOMER)
+        )
+        customerRepository.save(customerCopy)
     }
 
     fun findById(id: Int): CustomerModel {
