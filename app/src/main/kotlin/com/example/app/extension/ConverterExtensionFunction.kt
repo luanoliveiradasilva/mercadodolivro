@@ -12,7 +12,12 @@ import com.example.app.model.enums.BookStatus
 import com.example.app.model.enums.CustomerStatus
 
 fun PostCustomerRequest.toCustomerModel(): CustomerModel {
-    return CustomerModel(name = this.name, email = this.email, status = CustomerStatus.ACTIVE, password = this.password)
+    return CustomerModel(
+        name = this.name,
+        email = this.email,
+        status = CustomerStatus.ACTIVE,
+        password = this.password
+    )
 }
 
 fun PutCustomerRequest.toCustomerModel(previousValue: CustomerModel): CustomerModel {
@@ -20,8 +25,8 @@ fun PutCustomerRequest.toCustomerModel(previousValue: CustomerModel): CustomerMo
         id = previousValue.id,
         name = this.name,
         email = this.email,
-        previousValue.status,
-        previousValue.password
+        status = previousValue.status,
+        password = previousValue.password
     )
 }
 
@@ -55,7 +60,10 @@ fun CustomerModel.toResponse(): CustomerResponse {
 
 fun BookModel.toResponse(): BookResponse {
     return BookResponse(
+        id = this.idBook,
         name = this.nameBook,
-        price = this.price
+        price = this.price,
+        customer = this.customer,
+        status = this.status
     )
 }

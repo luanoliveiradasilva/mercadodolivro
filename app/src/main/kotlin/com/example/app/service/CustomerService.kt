@@ -5,7 +5,7 @@ import com.example.app.model.customer.CustomerModel
 import com.example.app.model.enums.CustomerStatus
 import com.example.app.model.enums.Errors
 import com.example.app.repository.CustomerRepository
-import com.mercadolivro.enums.Profile
+import com.example.app.model.enums.Roles
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
@@ -15,8 +15,6 @@ class CustomerService(
     private val bookService: BookService,
     private val bCrypt: BCryptPasswordEncoder
 ) {
-
-
     fun getAll(name: String?): List<CustomerModel> {
         name?.let {
             return customerRepository.findByNameContaining(it)
@@ -26,7 +24,7 @@ class CustomerService(
 
     fun create(customer: CustomerModel) {
         val customerCopy = customer.copy(
-            roles = setOf(Profile.CUSTOMER),
+            roles = setOf(Roles.CUSTOMER),
             password = bCrypt.encode(customer.password)
         )
         customerRepository.save(customerCopy)
@@ -50,5 +48,9 @@ class CustomerService(
 
         customer.status = CustomerStatus.INACTIVE
         customerRepository.save(customer)
+    }
+
+    fun emailAvailable(email: String): Boolean {
+        return !customerRepository.existsByEmail(email)
     }
 }
