@@ -1,6 +1,5 @@
-package com.mercadolivro.validation
+package com.example.app.validation
 
-import com.example.app.validation.EmailAvailableValidator
 import javax.validation.Constraint
 import javax.validation.Payload
 import kotlin.reflect.KClass

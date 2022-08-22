@@ -6,6 +6,7 @@ plugins {
 	kotlin("jvm") version "1.6.21"
 	kotlin("plugin.spring") version "1.6.21"
 	kotlin("plugin.jpa") version "1.6.21"
+	id("jacoco")
 }
 
 group = "com.example"
@@ -20,7 +21,6 @@ dependencies {
 	implementation ("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-security")
-	implementation("org.springframework.boot:spring-boot-starter-security:2.6.5")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -29,9 +29,15 @@ dependencies {
 	runtimeOnly("mysql:mysql-connector-java")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
+	//Mockk
+	testImplementation("io.mockk:mockk:1.12.5")
+
+
 	//JWT
 	implementation("io.jsonwebtoken:jjwt:0.9.1")
 
+	//Jacoco
+//	testImplementation("org.jacoco:org.jacoco.agent:0.8.8")
 
 	//Swagger configuration
 	implementation("io.springfox:springfox-swagger-ui:2.9.2")
@@ -48,4 +54,11 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+tasks.test {
+	finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+}
+tasks.jacocoTestReport {
+	dependsOn(tasks.test) // tests are required to run before generating the report
 }

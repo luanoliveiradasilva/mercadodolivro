@@ -1,7 +1,6 @@
 package com.example.app.validation
 
 import com.example.app.service.CustomerService
-import com.mercadolivro.validation.EmailAvailable
 import javax.validation.ConstraintValidator
 import javax.validation.ConstraintValidatorContext
 

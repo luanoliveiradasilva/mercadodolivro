@@ -42,10 +42,21 @@ class BookService(
         bookRepository.save(book)
     }
 
+    fun findAllByIds(bookIds: Set<Int>): List<BookModel> {
+        return bookRepository.findAllById(bookIds).toList()
+    }
+
     fun deleteByCustomer(customer: CustomerModel) {
         var books = bookRepository.findByCustomer(customer)
         for(book in books)
             book.status = BookStatus.DELETED
+        bookRepository.saveAll(books)
+    }
+
+    fun purchase(books: MutableList<BookModel>) {
+        books.map {
+            it.status = BookStatus.SOLD
+        }
         bookRepository.saveAll(books)
     }
 
