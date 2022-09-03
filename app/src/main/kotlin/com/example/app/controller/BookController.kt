@@ -16,7 +16,7 @@ import javax.validation.Valid
 
 
 @RestController
-@RequestMapping("book")
+@RequestMapping("v1/books")
 class BookController(
     val bookService: BookService,
     val customerService: CustomerService
@@ -34,7 +34,7 @@ class BookController(
         return bookService.findAll(pageable).map { it.toResponse() }
     }
 
-    @GetMapping("/active")
+    @GetMapping("/actives")
     fun findActive(@PageableDefault(page = 0, size = 10) pageable: Pageable): Page<BookResponse> =
         bookService.findActive(pageable).map { it.toResponse() }
 
