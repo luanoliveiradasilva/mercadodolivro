@@ -154,3 +154,11 @@ a conta de novo.
 * response
   ```
   ```
+  
+
+#### Glossário
+* [Kotlin](https://kotlinlang.org/docs/home.html)
+* [SpringSecurity](https://spring.io/guides/gs/securing-web/)
+* [Boas práticas de API](https://tipscode.com.br/como-construir-uma-api-restful-conheca-as-13-melhores-boas-praticas)
+* [Montar Readme](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+* [Swegger](https://www.treinaweb.com.br/blog/documentando-uma-api-spring-boot-com-o-swagger)
