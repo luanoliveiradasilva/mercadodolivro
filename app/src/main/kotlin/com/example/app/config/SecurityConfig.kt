@@ -49,7 +49,7 @@ class SecurityConfig(
         http.cors().and().csrf().disable()
         http.authorizeRequests()
             .antMatchers(*PUBLIC_MATCHERS).permitAll()
-            .antMatchers(HttpMethod.POST, *PUBLIC_POST_MATCHERS).permitAll()
+            .antMatchers(HttpMethod.POST).permitAll()
             .antMatchers(*ADMIN_MATCHERS).hasAuthority(Roles.ADMIN.description)
             .anyRequest().authenticated()
         http.addFilter(AuthenticationFilter(authenticationManager(), customerRepository, jwtUtil))

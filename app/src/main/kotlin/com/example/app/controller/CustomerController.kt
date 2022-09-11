@@ -7,7 +7,6 @@ import com.example.app.extension.toCustomerModel
 import com.example.app.extension.toResponse
 import com.example.app.service.CustomerService
 import io.swagger.annotations.ApiOperation
-import io.swagger.annotations.ApiParam
 import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
 import org.springframework.http.HttpStatus
